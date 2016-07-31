@@ -10,7 +10,7 @@ import com.capgemini.chess.service.enums.ChallengeStatus;
 import com.capgemini.chess.service.to.UserProfileTO;
 
 
-@Entity
+@Entity //needed only when database ready
 public class ChallengeEntity {
 	@Id
 	@GeneratedValue

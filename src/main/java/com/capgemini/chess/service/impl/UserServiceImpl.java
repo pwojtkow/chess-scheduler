@@ -9,7 +9,7 @@ import com.capgemini.chess.service.to.UserProfileTO;
 public class UserServiceImpl implements UserService {
 
 	@Override
-	public UserProfileTO readUser(Long id) {
+	public UserProfileTO readUser(long id) {
 
 		return new UserProfileTO();
 	}

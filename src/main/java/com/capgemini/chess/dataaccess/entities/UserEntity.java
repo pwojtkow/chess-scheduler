@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
-@Entity
+@Entity //needed only when database ready
 public class UserEntity {
 
 	@Id

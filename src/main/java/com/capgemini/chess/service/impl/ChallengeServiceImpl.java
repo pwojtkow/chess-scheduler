@@ -4,30 +4,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.chess.dao.ChallengeDao;
-import com.capgemini.chess.service.ChallangeService;
-import com.capgemini.chess.service.to.ChallengeTO;
-import com.capgemini.chess.service.to.UserProfileTO;
+import com.capgemini.chess.service.ChallengeService;
 
 @Service
-public class ChallengeServiceImpl implements ChallangeService {
+public class ChallengeServiceImpl implements ChallengeService {
 	
 	@Autowired
 	ChallengeDao challengeDao;
 
 	@Override
-	public void sendChallange(UserProfileTO user) {
+	public void sendChallange(long userId) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void acceptChallange(ChallengeTO challenge) {
+	public void acceptChallange(long challengeId) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void declineChallange(ChallengeTO challenge) {
+	public void declineChallange(long challengeId) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -49,6 +47,7 @@ public class ChallengeServiceImpl implements ChallangeService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 
 	
 	

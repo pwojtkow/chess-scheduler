@@ -1,8 +1,8 @@
 package com.capgemini.chess;
 
 /**
+ * All properties used inside the application code
  * @author PWOJTKOW
- * huj ci w dupe
  */
 public class ApplicationProperties {
 
