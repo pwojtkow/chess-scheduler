@@ -12,6 +12,7 @@ import com.capgemini.chess.service.to.UserProfileTO;
 
 @Entity //needed only when database ready
 public class ChallengeEntity {
+	
 	@Id
 	@GeneratedValue
 	private long id;

@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.capgemini.chess.dataaccess.entities.ChallengeEntity;
+import com.capgemini.chess.exceptions.ChallengeNotFoundExepction;
+import com.capgemini.chess.exceptions.UserNotFoundException;
 
 /**
  * Interface which gives CRUD operations on challenges in database
@@ -22,7 +24,7 @@ public interface ChallengeDao {
 	 * Method update all challenges for user mapped with id as param
 	 * @param userId
 	 */
-	void updateChallengesStateForUser(int userId);
+	void updateChallengesStateForUser(int userId) throws UserNotFoundException;
 	
 	/**
 	 * Connect with database and delete all expired challenges
@@ -39,7 +41,7 @@ public interface ChallengeDao {
 	 * @param userId
 	 * @return list of challenges that are mapped to user
 	 */
-	List<ChallengeEntity> getUserChallenges(int userId);
+	List<ChallengeEntity> getUserChallenges(int userId) throws UserNotFoundException;
 
 	/**
 	 * Add new challenges to database
@@ -51,5 +53,5 @@ public interface ChallengeDao {
 	 * @param id_challenges
 	 * @return challenge entity mapped with id in param
 	 */
-	ChallengeEntity findChallengeById(long id_challenges);
+	ChallengeEntity findChallengeById(long id_challenges) throws ChallengeNotFoundExepction;
 }

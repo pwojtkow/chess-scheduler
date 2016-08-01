@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.chess.dao.ChallengeDao;
+import com.capgemini.chess.exceptions.ChallengesOutOfLimitException;
+import com.capgemini.chess.exceptions.UserNotFoundException;
 import com.capgemini.chess.service.ChallengeService;
 
 @Service
@@ -13,7 +15,7 @@ public class ChallengeServiceImpl implements ChallengeService {
 	ChallengeDao challengeDao;
 
 	@Override
-	public void sendChallange(long userId) {
+	public void sendChallange(long userId) throws ChallengesOutOfLimitException, UserNotFoundException {
 		// TODO Auto-generated method stub
 		
 	}
