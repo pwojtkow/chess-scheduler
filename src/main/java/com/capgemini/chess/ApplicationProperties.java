@@ -20,4 +20,9 @@ public class ApplicationProperties {
 	 * Message to appear when challenge has been sent
 	 */
 	public static final String CHALLENGE_HAS_BEEN_SENT_MESSAGE = "Challenge has been sent";
+	
+	/**
+	 * Message to appear when challenge has been deleted
+	 */
+	public static final String CHALLENGE_HAS_BEEN_DELETED_MESSAGE = "Challenge has been deleted";
 }

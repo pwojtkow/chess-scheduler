@@ -14,18 +14,14 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ChallengeTo {
 
-	private long id;
+	private Long id;
 	private ChallengeStatus challengeStatus;
-	private long userSenderId;
-	private long userRecipientId;
+	private Long userSenderId;
+	private Long userRecipientId;
 	private DateTime challengeCreatingDate;
 	private DateTime challengeExpirationDate;
 
-	public void setChallengeExpirationDate(DateTime date) {
-		this.challengeExpirationDate = date.plusDays(VALIDATION_PERIOD_NUMER_OF_DAYS);
-	}
-
-	public ChallengeTo(long id, long userSenderId, long userRecipientId) {
+	public ChallengeTo(Long id, Long userSenderId, Long userRecipientId) {
 		this.id = id;
 		this.challengeStatus = ChallengeStatus.SEND;
 		this.userSenderId = userSenderId;
@@ -34,7 +30,7 @@ public class ChallengeTo {
 		this.challengeExpirationDate = this.challengeCreatingDate.plusDays(VALIDATION_PERIOD_NUMER_OF_DAYS);
 	}
 	
-	public ChallengeTo(long id, ChallengeStatus challengeStatus, long userSenderId, long userRecipientId,
+	public ChallengeTo(Long id, ChallengeStatus challengeStatus, Long userSenderId, Long userRecipientId,
 			DateTime challengeCreatingDate, DateTime challengeExpirationDate) {
 		this.id = id;
 		this.challengeStatus = challengeStatus;

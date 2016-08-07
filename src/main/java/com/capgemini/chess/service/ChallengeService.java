@@ -2,8 +2,7 @@ package com.capgemini.chess.service;
 
 import java.util.List;
 
-import com.capgemini.chess.exceptions.ChallengeNotFoundExepction;
-import com.capgemini.chess.exceptions.ChallengesOutOfLimitException;
+import com.capgemini.chess.exceptions.ChallengeNotFoundException;
 import com.capgemini.chess.exceptions.UserNotFoundException;
 import com.capgemini.chess.service.to.ChallengeTo;
 
@@ -17,19 +16,19 @@ public interface ChallengeService {
 	/**
 	 * @param userId - id user who is to be sent challenge
 	 */
-	void sendChallange(long id, long senderId, long recipientId) throws ChallengesOutOfLimitException, UserNotFoundException;
+	void sendChallange(Long id, Long senderId, Long recipientId);
 	/**
 	 * @param challengeId - id challenge that need to be accepted
 	 */
-	void acceptChallange(long challengeId) throws UserNotFoundException, ChallengeNotFoundExepction;
+	void acceptChallange(Long challengeId);
 	/**
 	 * @param challengeId - id challenge that need to by declined
 	 */
-	void rejectChallange(long challengeId) throws ChallengeNotFoundExepction;
+	void rejectChallange(Long challengeId) throws ChallengeNotFoundException;
 	/**
 	 * @param id challenge to cancel when challenge is already send
 	 */
-	void cancleSendChallenge(long challengeId) throws ChallengeNotFoundExepction;
+	void cancleSendChallenge(Long challengeId) throws ChallengeNotFoundException;
 	/**
 	 * Update challenges list from database
 	 */
@@ -38,7 +37,9 @@ public interface ChallengeService {
 	 * @param userId
 	 * @return
 	 */
-	int howManyActiveChallenges(long userId) throws UserNotFoundException;
+	int howManyActiveChallenges(Long userId) throws UserNotFoundException;
 	
+	void deleteChallenge(Long challengeId);
 	
+	ChallengeTo getChallengeById(Long challengeId);
 }

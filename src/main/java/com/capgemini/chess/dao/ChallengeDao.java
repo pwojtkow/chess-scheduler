@@ -2,11 +2,11 @@ package com.capgemini.chess.dao;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
-
 import com.capgemini.chess.dataaccess.entities.ChallengeEntity;
-import com.capgemini.chess.exceptions.ChallengeNotFoundExepction;
+import com.capgemini.chess.exceptions.ChallengeNotFoundException;
+import com.capgemini.chess.exceptions.ChallengeWithIdExistException;
 import com.capgemini.chess.exceptions.UserNotFoundException;
+import com.capgemini.chess.service.enums.ChallengeStatus;
 
 /**
  * Interface which gives CRUD operations on challenges in database
@@ -30,34 +30,36 @@ public interface ChallengeDao {
 	 * Method update all challenges for user mapped with id as param
 	 * @param userId
 	 */
-	void updateChallengesStateForUser(int userId) throws UserNotFoundException;
+	void updateChallengesStateForUser(Long userId) throws UserNotFoundException;
 	
 	/**
-	 * Connect with database and delete all expired challenges
+	 * Method delete all expired challenges from local database
 	 */
-	void deleteExpiredChallenges(List<ChallengeEntity> list);
-	
-	/**
-	 * Method for tests only - all logic on database side
-	 * @param list - local list of challenge entity
-	 */
-	void deleteExpiredChallengesFromLocalList(List<ChallengeEntity> list);
+	void deleteExpiredChallengesFromLocalList();
 	
 	/**
 	 * @param userId
 	 * @return list of challenges that are mapped to user
 	 */
-	List<ChallengeEntity> getUserChallenges(int userId) throws UserNotFoundException;
+	List<ChallengeEntity> getUserChallenges(Long userId) throws UserNotFoundException;
 
 	/**
 	 * Add new challenges to database
 	 * @param challengeList - list of challenges that need to be add to database
 	 */
-	void addNewChallenge(ChallengeEntity challengeEntity);
+	void addNewChallenge(ChallengeEntity challengeEntity) throws ChallengeWithIdExistException;
 	
 	/**
 	 * @param id_challenges
 	 * @return challenge entity mapped with id in param
 	 */
-	ChallengeEntity getChallengeById(long id_challenges) throws ChallengeNotFoundExepction;
+	ChallengeEntity getChallengeById(Long id_challenges) throws ChallengeNotFoundException;
+	
+	/**
+	 * @param challengesId
+	 * @throws ChallengeNotFoundException
+	 */
+	void deleteChallenge(Long challengeId) throws ChallengeNotFoundException;
+	
+	void changeChallengeState(Long challengeId, ChallengeStatus status) throws ChallengeNotFoundException;
 }

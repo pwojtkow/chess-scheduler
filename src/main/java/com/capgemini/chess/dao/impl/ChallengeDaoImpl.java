@@ -1,47 +1,42 @@
 package com.capgemini.chess.dao.impl;
 
 import java.util.ArrayList;
-
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.capgemini.chess.ChallengeDatabase;
 import com.capgemini.chess.dao.ChallengeDao;
 import com.capgemini.chess.dataaccess.entities.ChallengeEntity;
+import com.capgemini.chess.exceptions.ChallengeNotFoundException;
+import com.capgemini.chess.exceptions.ChallengeWithIdExistException;
+import com.capgemini.chess.service.enums.ChallengeStatus;
 
 import lombok.NonNull;
 
 @Repository
 public class ChallengeDaoImpl implements ChallengeDao {
 
-	private List<ChallengeEntity> challengesDatabase = new ArrayList<ChallengeEntity>();
+	private static List<ChallengeEntity> challengesDatabase = new ArrayList<ChallengeEntity>();
 
 	@Override
 	public List<ChallengeEntity> getExpiredChallenges() {
-		createChallengesDatabase();
-		// connect with database and get all expired challenges, then return
-		// them as a ArrayList.
 		// TODO Auto-generated method stub
 		return challengesDatabase;
 	}
 
 	@Override
-	public void updateChallengesStateForUser(int userId) {
+	public void updateChallengesStateForUser(Long userId) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void deleteExpiredChallenges(List<ChallengeEntity> list) {
-		// to delete after tests
-		list.clear();
-	}
-
-	@Override
-	public List<ChallengeEntity> getUserChallenges(int userId) {
+	public List<ChallengeEntity> getUserChallenges(Long userId) {
 		List<ChallengeEntity> list = new ArrayList<ChallengeEntity>();
-		for(ChallengeEntity challenge : getAllChallenges()) {
-			if(challenge.getId() == userId) {
+		for (ChallengeEntity challenge : getAllChallenges()) {
+			if (challenge.getId() == userId) {
 				list.add(challenge);
 			}
 		}
@@ -49,37 +44,60 @@ public class ChallengeDaoImpl implements ChallengeDao {
 	}
 
 	@Override
-	public void addNewChallenge(@NonNull ChallengeEntity challengeEntity) {
-		challengesDatabase.add(challengeEntity);
+	public void addNewChallenge(@NonNull ChallengeEntity challengeEntityToAdd) {
+		for (ChallengeEntity challengeInDatabase : getAllChallenges()) {
+			if (challengeEntityToAdd.getId() == challengeInDatabase.getId()) {
+				throw new ChallengeWithIdExistException("Challenge with this Id alredy exists!");
+			}
+		}
+		challengesDatabase.add(challengeEntityToAdd);
 	}
 
 	@Override
-	public void deleteExpiredChallengesFromLocalList(List<ChallengeEntity> list) {
-		// TODO Auto-generated method stub
-
+	public void deleteExpiredChallengesFromLocalList() {
+		Iterator<ChallengeEntity> iterator = getAllChallenges().iterator();
+		while (iterator.hasNext()) {
+			if (iterator.next().getChallengeExpirationDate().isAfterNow()) {
+				iterator.remove();
+			}
+		}
 	}
 
 	@Override
-	public ChallengeEntity getChallengeById(long id_challenges) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private void createChallengesDatabase() {
-		ChallengeEntity challenge1 = new ChallengeEntity();
-		ChallengeEntity challenge2 = new ChallengeEntity();
-		ChallengeEntity challenge3 = new ChallengeEntity();
-		ChallengeEntity challenge4 = new ChallengeEntity();
-
-		challengesDatabase.add(challenge1);
-		challengesDatabase.add(challenge2);
-		challengesDatabase.add(challenge3);
-		challengesDatabase.add(challenge4);
+	public ChallengeEntity getChallengeById(Long challengeId) {
+		List<ChallengeEntity> challengeList = getAllChallenges();
+		for (ChallengeEntity challenge : challengeList) {
+			if (challenge.getId() == challengeId) {
+				return challenge;
+			}
+		}
+		throw new ChallengeNotFoundException("Challenge has been not found");
 	}
 
 	@Override
 	public List<ChallengeEntity> getAllChallenges() {
 		return challengesDatabase;
+	}
+
+	@Override
+	public void deleteChallenge(Long challengeId) throws ChallengeNotFoundException {
+		ChallengeEntity challengeToDelete = getChallengeById(challengeId);
+		if( challengeToDelete == null) {
+			throw new ChallengeNotFoundException(
+					"Challenge with id: " + challengeId.toString() + " has been not found");
+		} else {
+			challengesDatabase.remove(challengeToDelete);
+		}
+		
+	}
+
+	@Override
+	public void changeChallengeState(Long challengeId, ChallengeStatus status) throws ChallengeNotFoundException {
+		if (getChallengeById(challengeId) == null) {
+			throw new ChallengeNotFoundException("Challenge with this Id do not exist!");
+		} else {
+			getChallengeById(challengeId).setChallengeStatus(status);
+		}
 	}
 
 }
