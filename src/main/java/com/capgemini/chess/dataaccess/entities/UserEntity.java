@@ -6,7 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
-@Entity //needed only when database ready
+/**
+ * User entity
+ * @author PWOJTKOW
+ */
+@Entity
 public class UserEntity {
 
 	@Id

@@ -26,18 +26,18 @@ public class ChallengeServiceTest {
 	@Autowired
 	private ChallengeDao challengeDao;
 	
-//	@Test
-//	public void shouldAddNewChallenge() {
-//		//given
-//		Long senderId = 1L;
-//		Long recipientId = 2L;
-//		Long challengeId = 1L;
-//		int challengesQuantityInDatabase = challengeDao.getAllChallenges().size();
-//		//when
-//		challengeService.sendChallange(challengeId, senderId, recipientId);
-//		//then
-//		assertEquals(challengesQuantityInDatabase + 1, challengeDao.getAllChallenges().size());
-//	}
+	@Test
+	public void shouldAddNewChallenge() {
+		//given
+		Long senderId = 1L;
+		Long recipientId = 2L;
+		Long challengeId = 1L;
+		int challengesQuantityInDatabase = challengeDao.getAllChallenges().size();
+		//when
+		challengeService.sendChallange(challengeId, senderId, recipientId);
+		//then
+		assertEquals(challengesQuantityInDatabase + 1, challengeDao.getAllChallenges().size());
+	}
 	
 	@Test
 	public void shouldDeleteChallenge() {

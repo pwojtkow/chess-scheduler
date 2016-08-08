@@ -20,6 +20,10 @@ import com.capgemini.chess.exceptions.ChallengeNotFoundException;
 import com.capgemini.chess.exceptions.ChallengeWithIdExistException;
 import com.capgemini.chess.service.ChallengeService;
 import com.capgemini.chess.service.to.ChallengeTo;
+/**
+ * Rest service to change challenges states
+ * @author PWOJTKOW
+ */
 @Controller
 @ResponseBody
 public class ChallengeRestService {
@@ -44,7 +48,6 @@ public class ChallengeRestService {
 	 * @param recipientId - id mapped to challenge recipient
 	 * @return - message confirm that challenge has been sent and http status "OK"
 	 */
-	
 	@RequestMapping(value = "/rest/challenge/add", method = RequestMethod.PUT, produces = MediaType.ALL_VALUE)
 	public ResponseEntity<String> addNewChallenge(@RequestParam("challenge_id") Long challengeId,
 			@RequestParam("sender_id") Long senderId, @RequestParam("recipient_id") Long recipientId) {

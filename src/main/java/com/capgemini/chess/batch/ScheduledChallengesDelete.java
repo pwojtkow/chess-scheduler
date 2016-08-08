@@ -18,6 +18,10 @@ public class ScheduledChallengesDelete {
 	@Autowired
 	private ChallengeDao challengeDao;
 	
+	
+	/**
+	 * Method should delete all expired challenges from local list when actual time is 3.00 AM
+	 */
 	@Scheduled(cron = DELETING_CHALLENGES_SCHEDULE_PERIOD)
 	public void deleteChallenges() {
 		challengeDao.deleteExpiredChallengesFromLocalList();

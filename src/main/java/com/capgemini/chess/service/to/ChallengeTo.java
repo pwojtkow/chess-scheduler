@@ -9,6 +9,10 @@ import com.capgemini.chess.service.enums.ChallengeStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+/**
+ * Transfer object of challenge
+ * @author PWOJTKOW
+ */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -31,7 +35,7 @@ public class ChallengeTo {
 	}
 	
 	public ChallengeTo(Long id, ChallengeStatus challengeStatus, Long userSenderId, Long userRecipientId,
-			DateTime challengeCreatingDate, DateTime challengeExpirationDate) {
+			DateTime challengeCreatingDate) {
 		this.id = id;
 		this.challengeStatus = challengeStatus;
 		this.userSenderId = userSenderId;

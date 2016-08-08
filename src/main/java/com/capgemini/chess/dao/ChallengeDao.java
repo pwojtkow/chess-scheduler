@@ -22,13 +22,14 @@ public interface ChallengeDao {
 	
 	/**
 	 * Method for tests only - all logic on database side
-	 * @return
+	 * @return all expired challenges from database
 	 */
 	List<ChallengeEntity> getExpiredChallenges();
 	
 	/**
 	 * Method update all challenges for user mapped with id as param
-	 * @param userId
+	 * @param userId - id mapped to user 
+	 * @throws UserNotFoundException when user with this id do not exist in database
 	 */
 	void updateChallengesStateForUser(Long userId) throws UserNotFoundException;
 	
@@ -38,28 +39,41 @@ public interface ChallengeDao {
 	void deleteExpiredChallengesFromLocalList();
 	
 	/**
-	 * @param userId
+	 * Method finds in database and returns all challenges mapped to user
+	 * @param userId - id mapped to suer
 	 * @return list of challenges that are mapped to user
+	 * @throws UserNotFoundException when user with this id do not exist in database
 	 */
 	List<ChallengeEntity> getUserChallenges(Long userId) throws UserNotFoundException;
 
 	/**
+	 * Method add new challenge to database
 	 * Add new challenges to database
 	 * @param challengeList - list of challenges that need to be add to database
+	 * @throws ChallengeWithIdExistException when challenge with this id already exist in database
 	 */
 	void addNewChallenge(ChallengeEntity challengeEntity) throws ChallengeWithIdExistException;
 	
 	/**
-	 * @param id_challenges
+	 * Method gets challenge by id
+	 * @param challengeId - id mapped to challenge
 	 * @return challenge entity mapped with id in param
+	 * @throws ChallengeNotFoundException when challenge with this id do not exist in database
 	 */
-	ChallengeEntity getChallengeById(Long id_challenges) throws ChallengeNotFoundException;
+	ChallengeEntity getChallengeById(Long challengeId) throws ChallengeNotFoundException;
 	
 	/**
-	 * @param challengesId
-	 * @throws ChallengeNotFoundException
+	 * Method delete challenge by id
+	 * @param challengesId - id mapped to challenge
+	 * @throws ChallengeNotFoundException when challenge with this id do not exist in database
 	 */
 	void deleteChallenge(Long challengeId) throws ChallengeNotFoundException;
 	
+	/**
+	 * Method change challenge state
+	 * @param challengeId - id mapped to challenge to change
+	 * @param status - new status of challenge
+	 * @throws ChallengeNotFoundException when challenge with this id do not exist in database
+	 */
 	void changeChallengeState(Long challengeId, ChallengeStatus status) throws ChallengeNotFoundException;
 }

@@ -12,6 +12,10 @@ import com.capgemini.chess.service.enums.ChallengeStatus;
 import com.capgemini.chess.service.mapper.ChallengeMapper;
 import com.capgemini.chess.service.to.ChallengeTo;
 
+/**
+ * Implementation of methods from ChallengeService
+ * @author PWOJTKOW
+ */
 @Service
 public class ChallengeServiceImpl implements ChallengeService {
 
@@ -69,6 +73,16 @@ public class ChallengeServiceImpl implements ChallengeService {
 	@Override
 	public ChallengeTo getChallengeById(Long challengeId) {
 		return ChallengeMapper.map(challengeDao.getChallengeById(challengeId));
+	}
+
+	@Override
+	public void sendChallenge(ChallengeTo challengeTo) {
+		challengeDao.addNewChallenge(ChallengeMapper.map(challengeTo));
+	}
+
+	@Override
+	public void deleteExpiredChallenges() {
+		challengeDao.deleteExpiredChallengesFromLocalList();
 	}
 	
 }

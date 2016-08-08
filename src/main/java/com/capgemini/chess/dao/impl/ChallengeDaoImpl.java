@@ -1,12 +1,14 @@
 package com.capgemini.chess.dao.impl;
 
+import static com.capgemini.chess.ApplicationProperties.CHALLENGE_EXIST_MESSAGE;
+import static com.capgemini.chess.ApplicationProperties.CHALLENGE_NOT_FOUND;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.capgemini.chess.ChallengeDatabase;
 import com.capgemini.chess.dao.ChallengeDao;
 import com.capgemini.chess.dataaccess.entities.ChallengeEntity;
 import com.capgemini.chess.exceptions.ChallengeNotFoundException;
@@ -15,9 +17,16 @@ import com.capgemini.chess.service.enums.ChallengeStatus;
 
 import lombok.NonNull;
 
+/**
+ * Implementation of all public method included in ChallengeDao
+ * @author PWOJTKOW
+ */
 @Repository
 public class ChallengeDaoImpl implements ChallengeDao {
 
+	/**
+	 * Local database of challenges entity
+	 */
 	private static List<ChallengeEntity> challengesDatabase = new ArrayList<ChallengeEntity>();
 
 	@Override
@@ -47,7 +56,7 @@ public class ChallengeDaoImpl implements ChallengeDao {
 	public void addNewChallenge(@NonNull ChallengeEntity challengeEntityToAdd) {
 		for (ChallengeEntity challengeInDatabase : getAllChallenges()) {
 			if (challengeEntityToAdd.getId() == challengeInDatabase.getId()) {
-				throw new ChallengeWithIdExistException("Challenge with this Id alredy exists!");
+				throw new ChallengeWithIdExistException(CHALLENGE_EXIST_MESSAGE);
 			}
 		}
 		challengesDatabase.add(challengeEntityToAdd);
@@ -71,7 +80,7 @@ public class ChallengeDaoImpl implements ChallengeDao {
 				return challenge;
 			}
 		}
-		throw new ChallengeNotFoundException("Challenge has been not found");
+		throw new ChallengeNotFoundException(CHALLENGE_NOT_FOUND);
 	}
 
 	@Override
@@ -94,7 +103,7 @@ public class ChallengeDaoImpl implements ChallengeDao {
 	@Override
 	public void changeChallengeState(Long challengeId, ChallengeStatus status) throws ChallengeNotFoundException {
 		if (getChallengeById(challengeId) == null) {
-			throw new ChallengeNotFoundException("Challenge with this Id do not exist!");
+			throw new ChallengeNotFoundException(CHALLENGE_NOT_FOUND);
 		} else {
 			getChallengeById(challengeId).setChallengeStatus(status);
 		}

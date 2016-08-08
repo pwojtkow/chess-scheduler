@@ -5,6 +5,10 @@ import com.capgemini.chess.service.enums.MatchStatus;
 
 import lombok.Getter;
 import lombok.Setter;
+/**
+ * Transfer object of match
+ * @author PWOJTKOW
+ */
 @Getter @Setter
 public class MatchTo {
 

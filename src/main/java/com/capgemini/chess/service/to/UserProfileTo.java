@@ -3,6 +3,10 @@ package com.capgemini.chess.service.to;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Transfer object of user profile
+ * @author PWOJTKOW
+ */
 public class UserProfileTo {
 	
 	private long id;

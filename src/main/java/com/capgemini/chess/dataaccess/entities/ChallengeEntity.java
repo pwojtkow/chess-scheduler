@@ -15,6 +15,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Challenge entity 
+ * @author PWOJTKOW
+ */
 @Entity
 @Getter
 @Setter

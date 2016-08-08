@@ -11,6 +11,11 @@ import com.capgemini.chess.service.to.ChallengeTo;
  */
 public class ChallengeMapper {
 
+	/**
+	 * Converter from challenge entity to challenge transfer object (TO)
+	 * @param challengeEntity - entity to convert
+	 * @return converted entity as transfer object (TO)
+	 */
 	public static ChallengeTo map(ChallengeEntity challengeEntity) {
 		if (challengeEntity != null) {
 			ChallengeTo challengeTo = new ChallengeTo();
@@ -24,7 +29,12 @@ public class ChallengeMapper {
 		}
 		return null;
 	}
-
+	
+	/**
+	 * Converter from challenge transfer object (TO) to challenge entity
+	 * @param challengeTo - transfer object to convert
+	 * @return converted transfer object as entity
+	 */
 	public static ChallengeEntity map(ChallengeTo challengeTo) {
 		if (challengeTo != null) {
 			ChallengeEntity challengeEntity = new ChallengeEntity();
@@ -39,6 +49,12 @@ public class ChallengeMapper {
 		return null;
 	}
 	
+	/**
+	 * Updates data from transfer object to entity
+	 * @param challengeEntity - entity to update
+	 * @param challengeTo - transfer object to update
+	 * @return entity updated based on transfer object data
+	 */
 	public static ChallengeEntity update(ChallengeEntity challengeEntity, ChallengeTo challengeTo) {
 		if (challengeTo != null && challengeEntity != null) {
 			challengeEntity.setId(challengeTo.getId());

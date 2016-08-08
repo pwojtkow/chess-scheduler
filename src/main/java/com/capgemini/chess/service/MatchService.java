@@ -8,6 +8,9 @@ import com.capgemini.chess.service.enums.MatchStatus;
  */
 public interface MatchService {
 	
+	/**
+	 * Method create new match
+	 */
 	void createNewMatch();
 	
 	void deleteMatch(long matchId);
